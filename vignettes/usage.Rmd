@@ -26,7 +26,8 @@ Currently distillr is only available in GitHub
 #   remotes::install_github("anttonalberdi/distillr")
 # }
 library("distillr")
-library("magrittr", include.only = "|>")
+#library("magrittr", include.only = "|>") # The native pipe is not part of magrittr afaik, and requires R>=4.1
+
 ```
 
 ## Quickstart
@@ -75,23 +76,23 @@ Genome-specific Genome-Inferred Functional Trait (GIFT) profiles can be plotted 
 library(ggplot2)
 library(RColorBrewer)
 
-gift_elements |>
-  dplyr::left_join(
-    distillr::gift_info |>
-      dplyr::select(domain_id:element_id) |>
-      dplyr::distinct()
-  ) |>
-  ggplot(aes(
-    x = element_id, y = mag_id, fill = completeness, group = function_id
-  )) +
-  geom_tile() +
-  scale_y_discrete(guide = guide_axis(check.overlap = TRUE)) +
-  scale_x_discrete(guide = guide_axis(check.overlap = TRUE)) +
-  scale_fill_gradientn(limits = c(0, 1), colours = brewer.pal(7, "YlGnBu")) +
-  facet_grid(. ~ function_id, scales = "free", space = "free") +
-  theme_grey(base_size = 8) +
-  theme(
-    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
-    strip.text.x = element_text(angle = 90)
-  )
+# gift_elements |>
+#   dplyr::left_join(
+#     distillr::gift_info |>
+#       dplyr::select(domain_id:element_id) |>
+#       dplyr::distinct()
+#   ) |>
+#   ggplot(aes(
+#     x = element_id, y = mag_id, fill = completeness, group = function_id
+#   )) +
+#   geom_tile() +
+#   scale_y_discrete(guide = guide_axis(check.overlap = TRUE)) +
+#   scale_x_discrete(guide = guide_axis(check.overlap = TRUE)) +
+#   scale_fill_gradientn(limits = c(0, 1), colours = brewer.pal(7, "YlGnBu")) +
+#   facet_grid(. ~ function_id, scales = "free", space = "free") +
+#   theme_grey(base_size = 8) +
+#   theme(
+#     axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+#     strip.text.x = element_text(angle = 90)
+#   )
 ```

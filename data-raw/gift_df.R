@@ -482,12 +482,34 @@ if (!interactive()) {
     dplyr::select(-from, -to) |>
     dplyr::distinct()
 
+
+  # Save into individual files
   save(
     gift_graph,
-    gift_info,
-    file = "R/sysdata.rda",
+    file = "R/gift_graph.rda",
     compress = "xz",
     compression_level = 9,
     version = 2
   )
+
+  save(
+    gift_info,
+    file = "R/gift_info.rda",
+    compress = "xz",
+    compression_level = 9,
+    version = 2
+  )
+
+
+
+
+  # save(
+  #   gift_graph,
+  #   gift_info,
+  #   file = "R/sysdata.rda",
+  #   compress = "xz",
+  #   compression_level = 9,
+  #   version = 2
+  # )
 }
+
